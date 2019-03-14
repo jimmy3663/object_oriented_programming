@@ -79,12 +79,12 @@ int main(){
 		}
 
 		else if(f=="Delete"){
-			cout<<"ID? ";
+			//cout<<"ID? ";
 			cin>>id;
 			for(int i=0; i<a; i++){
 				if(v[i][0]==id){
-					v[i][0]=" ";
-					v[i][1]=" ";
+					v[i][0]="";
+					v[i][1]="";
 				}
 			}	
 			for(int i=0; i<a; i++)
