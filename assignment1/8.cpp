@@ -11,17 +11,12 @@ string WARNINGS[] = {
 "Must contain at least 1 special character."};
 
 
-void pwsize(string password){
-	if(password.size()<6)
-		cout<<WARNINGS[0]<<endl;
-}
-
-
-void pwchar(string password){
+void pwcal(string password){
 	int cnt1=0;
 	int cnt2=0;
 	int cnt3=0;
 	int cnt4=0;
+	int cnt5=0;
 
 	for(int i=0; i<password.size(); i++){
 		if(password[i]>'a' && password[i]<'z')
@@ -33,15 +28,29 @@ void pwchar(string password){
 		else 
 			cnt4++;
 	}
-
-	if(cnt1<1)
+	if(password.size()<6){
+		cout<<WARNINGS[0]<<endl;
+		cnt5++;
+	}
+	if(cnt1<1){
 		cout<<WARNINGS[2]<<endl;
-	if(cnt2<1)
+		cnt5++;
+	}
+	if(cnt2<1){
 		cout<<WARNINGS[3]<<endl;
-	if(cnt3<1)
+		cnt5++;
+	}
+	if(cnt3<1){
 		cout<<WARNINGS[1]<<endl;
-	if(cnt4<1)
+		cnt5++;
+	}
+	if(cnt4<1){
 		cout<<WARNINGS[4]<<endl;
+		cnt5++;
+	}
+
+	if(cnt5<1)
+		cout<<"Thank you for signing up!"<<endl;
 
 }
 
@@ -50,8 +59,7 @@ int main()
 	string password;
 	cin >> password;
 	
-	pwsize(password);
-	pwchar(password);
+	pwcal(password);
 
 
     return 0;
