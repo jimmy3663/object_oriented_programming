@@ -3,64 +3,6 @@
 
 using namespace std;
 
-/*void time(int h, int m){
-	if(m==0){
-		if(h==1)
-			cout<<"one o'clock"<<endl;
-		else if(h==2)
-			cout<<"two o'clock"<<endl;
-		else if(h==3)
-			cout<<"three o'clock"<<endl;
-		else if(h==4)
-			cout<<"four o'clock"<<endl;
-		else if(h==5)
-			cout<<"five o'clock"<<endl;
-		else if(h==6)
-			cout<<"six o'clock"<<endl;
-		else if(h==7)
-			cout<<"seven o'clock"<<endl;
-		else if(h==8)
-			cout<<"eight o'clock"<<endl;
-		else if(h==9)
-			cout<<"nine o'clock"<<endl;
-		else if(h==10)
-			cout<<"ten o'clock"<<endl;
-		else if(h==11)
-			cout<<"elven o'clock"<<endl;
-		else if(h==12)
-			cout<<"twelve o'clock"<<endl;
-	}
-	else if(m == 15)
-
-}
-
-void hour(int h){
-		if(h==1)
-			cout<<"one"<<endl;
-		else if(h==2)
-			cout<<"two"<<endl;
-		else if(h==3)
-			cout<<"three"<<endl;
-		else if(h==4)
-			cout<<"four"<<endl;
-		else if(h==5)
-			cout<<"five"<<endl;
-		else if(h==6)
-			cout<<"six"<<endl;
-		else if(h==7)
-			cout<<"seven"<<endl;
-		else if(h==8)
-			cout<<"eight"<<endl;
-		else if(h==9)
-			cout<<"nine"<<endl;
-		else if(h==10)
-			cout<<"ten"<<endl;
-		else if(h==11)
-			cout<<"elven"<<endl;
-		else if(h==12)
-			cout<<"twelve"<<endl;
-}*/
-
 int main(){
 	int h,m;
 
