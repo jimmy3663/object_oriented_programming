@@ -17,17 +17,12 @@ int main(){
    	double c = 0, count[26] = {0};
    	int x, y, total=0, a=0;
    	double f;
- 	
-// 	transform(str.begin(), str.end(), str.begin(), tolower);
+   	char w;
+
  	for(int i=0; i<str.size(); i++){
- 		for(int j=i; j<str.size(); j++){
- 			if(str[i]>str[j]){
- 				swap(str[i], str[j]);
-
- 			}
- 		}
+ 		char tmp= tolower(str[i]);
+ 		str[i] = tmp;
  	}
-
 
    	while (str[c] != '\0') {
  
@@ -35,8 +30,7 @@ int main(){
         	 x = str[c] - 'a';
          	count[x]++;
       	}
- 
-	      c++;
+	    c++;
    	}
 
    		
@@ -45,37 +39,19 @@ int main(){
  		total = total + count[i];
  	}
 
- 	c=0;
 
- 	/*string *arr = new string [str.size()];
+ 	for(int i=0; i<26; i++){
+ 		if(count[i]>0){
+ 			f = count[i]/total;
+ 			w = i+'a';
+ 			char t = toupper(w);
+ 			char q = tolower(w);
 
- 	for(int i=0; i<str.size(); i++){
- 		for(int j=i; j<str.size(); j++){
- 			if(str[i] == arr[j])
- 				continue; 
- 			else 
- 				arr[i] = str[i];
- 		}
- 	}*/
-
- 	while(str[c] !='\0'){
- 		y = str[c] - 'a';
-
- 		if(str[c]==' '){
- 			c++;
- 			continue;
- 		}
-
- 		if(count[y]>0){
- 			f= count[y]/total;
- 			char t = toupper(str[c]);
- 			char q = tolower(str[c]);
+ 			cout<<fixed;
+ 			cout.precision(6);
  			cout<<t<<"("<<q<<")"<<" "<<f<<endl;
  		}
-
- 		c++;
- 		a++;
- 	}  
+ 	}
 
 
 }
