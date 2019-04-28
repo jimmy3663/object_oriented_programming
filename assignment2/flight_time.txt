@@ -1,0 +1,4 @@
+Sapporo: [180]
+Tokyo: [150]
+Boracay: [210]
+DaNang: [160]
