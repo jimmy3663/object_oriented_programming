@@ -8,6 +8,7 @@ Namecard::Namecard(){
 	//m_Name={,};
 	//m_Phonenumber={,};
 	//m_Address={,};
+	cout<<"constructor"<<endl;
 	m_Age=0;
 }
 
@@ -16,6 +17,7 @@ Namecard::~Namecard(){
 		//m_Phonenumber=0;
 		//m_Address=0;
 		//m_Age=0;
+	cout<<"destructor"<<endl;
 }
 
 void Namecard::SetName(char *name){

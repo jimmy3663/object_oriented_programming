@@ -1,0 +1,6 @@
+acid
+Apple
+bed 
+bridge 
+Chair 
+computer

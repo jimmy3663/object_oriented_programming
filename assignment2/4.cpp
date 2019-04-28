@@ -20,4 +20,6 @@ int main(){
 	cout<<"Pheone Number: "<<A.GetPhonenumber()<<endl;
 	cout<<"Address: "<<A.GetAddress()<<endl;
 	cout<<"Age: "<<A.GetAge()<<endl;
+
+	return 0;
 }
