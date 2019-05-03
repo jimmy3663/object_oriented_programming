@@ -3,6 +3,7 @@
 #include <fstream>
 #include <algorithm>
 #include <functional>
+
 using namespace std;
 
 namespace
@@ -25,39 +26,62 @@ namespace
 }
 
 int main(){
+
 	ifstream in("words.txt");
-	vector <string> v;
-	vector <string> store;
-	vector <string> result;
-	string s;
-	while(!in.eof()){
-		getline(in,s);
-		v.push_back(s);
+	vector <int> space;
+	int filesize=0;
+
+	in.seekg(0,ios::end);
+	filesize=in.tellg();
+	in.seekg(0,ios::beg);
+	char *s = new char[filesize];
+
+	in.read(&s[0],filesize);
+
+	int spcnt=0;
+	int enter=0;
+
+	for(int i=0; i<filesize; i++){
+		if(s[i]>32&&s[i]<127)
+			continue;
+		else{
+			if(s[i]==13)
+				enter++;
+			spcnt++;
+			space.push_back(i);
+		}
 	}
 
+	spcnt=space.size()-enter;
 
+	char **store = new char*[spcnt];
+
+	for(int i=0; i<spcnt+1; i++){
+		store[i]= new char;
+	}
+
+	int col=0;
+	int row=0;
+	for(int i=0; i<filesize; i++){
+		if(s[i]>32&&s[i]<127){
+			store[col][row++]=s[i];
+		}
+		else if(s[i]==32||s[i]==10){
+			col++;
+			row=0;
+		}
+	}
+
+	vector <char*> v;
+
+	for(int i=0; i<col+1;i++){
+		v.push_back(store[i]);
+	}
+
+	sort(v.begin(),v.end(),NoCaseLess);
+	ofstream outFile("words.txt");
 	for(int i=0; i<v.size(); i++){
-		vector <int> space;
-		space.push_back(0);
-		for(int j=0; j<v[i].length();j++){
-
-			if(v[i][j]==' ')
-				space.push_back(j+1);
-		}
-
-		space.push_back(v[i].length());
-
-		for(int k=0; k<space.size(); k++){
-			if(k==space.size()-1)
-				break;
-			store.push_back(v[i].substr(space[k],space[k+1]-space[k]));
-		}
+		outFile<<v[i]<<endl;
 	}
 
-	sort(store.begin(),store.end(),NoCaseLess);
-
-	ofstream outFile("result7.txt");
-	for(int i=0; i<store.size(); i++){
-		outFile<<store[i]<<endl;
-	}
 }

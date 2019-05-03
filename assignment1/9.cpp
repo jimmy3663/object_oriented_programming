@@ -5,13 +5,8 @@ using namespace std;
 
 int main(){
 	srand(time (NULL));
-	int col;
-	int row;
-
-	cout<<"Enter the coloum : ";
-	cin>>col;
-	cout<<"Enter the row : ";
-	cin>>row;
+	int col=9;
+	int row=3;
 
 	int **arr =new int *[col];
 

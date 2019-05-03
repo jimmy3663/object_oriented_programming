@@ -5,7 +5,7 @@ using namespace std;
 int main(){
 	
 	int n;
-	cout<<"Enter the size of Magic square: ";
+	cout<<"Enter the size of Magic square: "; 
 	cin>>n;
 	int arr[n][n];
 	

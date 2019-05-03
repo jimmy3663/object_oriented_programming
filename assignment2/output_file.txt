@@ -1,0 +1,5 @@
+Departure date : 2015/12/12
+Departure time : 12:12
+Destination : Tokyo
+Arrival date : 2015/12/112
+Arrival time : 14:42

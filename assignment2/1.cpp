@@ -80,17 +80,16 @@ int main(){
 	int minute = atoi(min.c_str());
 
 	for(int i=0 ; i<v.size();i++){
-		string tmp;
-		for(int j=0; j<v[i].length()-7;j++){
-			tmp[j]=v[i][j];
+		for(int j=0; j<v[i].length();j++){
+			string con;
+			string len;
+			if(v[i][j]==':'||v[i][j]==' '){
+
+			}
+			else {
+				con[j]=
+			}
 		}
-		cout<<tmp<<endl;
-	
-		int cnt=0;
-		if(tmp==dest)
-			cout<<tmp<<endl;
-		
-	
 	}
 
 

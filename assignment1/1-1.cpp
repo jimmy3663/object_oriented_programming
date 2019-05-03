@@ -41,10 +41,6 @@ void asterisk(int num){ // printing star asterisk function
 	}
 	cout<<endl;
 
-	//a=num/2;
-	//int b;
-	//b=a-1;
-
 	for(int i=0; i<a; i++){ // after the middle row condition 
 		for(int j=0; j<num; j++){
 			if(i==a-1){

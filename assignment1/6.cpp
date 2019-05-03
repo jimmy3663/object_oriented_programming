@@ -8,7 +8,6 @@ int main(){
 	cin>>num;
 	
 	int **arr=new int*[num]; // double array 
-	int *ans=new int[num]; 
 
 	for(int i=0; i<num; i++){
 		arr[i] = new int [6]; // making array 

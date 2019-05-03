@@ -4,5 +4,3 @@ bed
 bridge
 Chair
 computer
-job
-jump

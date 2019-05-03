@@ -9,7 +9,7 @@ int main(){
 	int td; // travel distance 
 	int tmp;
 	int cf; // current fare 
-
+''
 	cout<< "Initial Balance : 20000"<<endl; // initial balance 
 	while(1){ // do untill input is -1 
 		cout<< "Entering each travel distance : ";
