@@ -19,13 +19,12 @@ private:
 class CacheManager{
 private:
 	CacheNode *HeadNode;
-	CacheNode *TailNode;
+	//CacheNode *TailNode;
 	int cnt; 
 	int time;
 
 public:
 	CacheManager();
-	int Hit(string w, int);
 	void Push(string, int);
 	void Insert(string, int, int);
 	void Del();
@@ -37,7 +36,7 @@ public:
 };
 
 CacheManager::CacheManager(){
-	HeadNode = TailNode = NULL;
+	HeadNode = NULL;
 	cnt = 1;
 	time =1;
 }
@@ -159,35 +158,6 @@ void CacheManager::Insert(string w, int ts, int min){
 
 void CacheManager::Print(string w, int ts){
 	CacheNode *current=HeadNode;
-
-	/*if(HeadNode == NULL){
-		cout<<"Miss ";
-	}
-
-	else {
-		CacheNode *current = HeadNode;
-		while(current!=NULL){
-			string temp1 = current->Word;
-			string temp2 = w;
-
-			for(int i=0; i<temp1.size(); i++){
-				temp1[i]=toupper(temp1[i]);
-			}
-			for(int i=0; i<temp2.size(); i++){
-				temp2[i] = toupper(temp2[i]);
-			}
-
-			if(temp1==temp2){
-				cout<<"Hit ";
-				break;
-			}
-			else{
-				cout<<"Miss ";
-				break;
-			}
-			current=current->NextNode;
-		}
-	}*/
 
 	while(current!=NULL){
 		cout<<current->Word<<": "<<current->Timestamp<<" ";
