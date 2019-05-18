@@ -25,26 +25,96 @@ int main(){
 
 	}
 
-	Human *h = hl.GetHead();
-	Monster *m = ml.GetHead();
-	int i=0;
+	
+	int i=1;
 	while(1){
-		h->action(m);
-		m->action(h);
+		//cout<<"i: "<<i<<endl;
+		cout<<"============= Round "<<i<<" ============="<<endl;
+		i++;
+		Human *h = hl.GetHead();
+		Monster *m = ml.GetHead();
+		int hcnt=0;
+		int mcnt=0;
+		int hsize=hl.GetSize();
+		int msize=ml.GetSize();
+		cout<<"hsize: "<<hsize<<endl;
+		cout<<"msize: "<<msize<<endl;
+		while(1){
+			if(hcnt == hsize && mcnt == msize)
+				break;
+			cout<<"monster Index: "<<m->GetIndex()<<endl;
+			if(hcnt < hsize){
+				cout<<"why?"<<endl;
+				h->action(ml.GetHead());
+			}
 
-		if(h->GetHealth()<=0)
+			if(mcnt < msize){
+				cout<<"Here"<<endl;
+				m->action(hl.GetHead());
+
+			}
+
+
 			hl.DeleteList(h);
-		if(m->GetHealth()<=0)
 			ml.DeleteList(m);
 
-		h=h->Getnext();
-		m=m->Getnext();
-		i++;
-		if(hl.GetHead() == NULL || ml.GetHead() == NULL)
-			break;
-		hl.Print();
-		ml.Print();
-	}
+			
+			//else if(m->Getprev()->Getnext() ==NULL)
+			//	break;
 
+			/*if(h->Getnext() == NULL && m->Getnext() == NULL){
+				cout<<i<<" round done"<<endl;
+				break;
+			}
+			else{
+				if(h->Getnext() == NULL && m->Getnext() !=NULL){
+					m = m->Getnext();
+				}
+				else if(h->Getnext() != NULL && m->Getnext() == NULL){
+					h = h->Getnext();
+				}
+				else {
+					m = m->Getnext();
+					h = h->Getnext();
+				}
+			}*/
+			if(hcnt < hsize){
+				h= h->Getnext();
+				hcnt++;
+			}
+			if(mcnt<msize){
+				m = m->Getnext();
+				mcnt++;
+			}
+			cout<<"hcnt: "<<hcnt<<endl;
+			cout<<"mcnt: "<<mcnt<<endl;
+
+		}
+		if(hl.GetHead()==NULL && ml.GetHead() != NULL){
+			cout<<"<Human>"<<endl;
+			cout<<"<Monster>"<<endl;
+			ml.Print();
+			cout<<"Human has been defeated"<<endl;
+			break;
+		}
+		else if(hl.GetHead() != NULL && ml.GetHead() == NULL){
+			cout<<"<Human>"<<endl;
+			hl.Print();
+			cout<<"<Monster>"<<endl;
+			cout<<"Monster has been defeated"<<endl;
+			break;
+		}
+		else if(hl.GetHead() == NULL && ml.GetHead() ==NULL){
+			cout<<"<Human>"<<endl;
+			cout<<"<Monster>"<<endl;
+		}
+		else{
+			cout<<"<Human>"<<endl;
+			hl.Print();
+			cout<<"<Monster>"<<endl;
+			ml.Print();
+		}
+
+	}
 	
 }
