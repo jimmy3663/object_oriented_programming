@@ -115,66 +115,55 @@ void NeList::Insert(int n){
 }
 
 void NeList::Conbreak(){
-	Neuron *current = HeadNeuron;
+	Neuron *current = NULL;
 	Neuron *tmp = NULL;
 	vector <int> v;
 	srand(1);
 
-	for(int i=0; i<9; i++){
-		int hit = 0;
-		int breakcon = rand()%10;
-	//	cout<<"break : "<<breakcon<<endl;
-		if(breakcon == 0){
-			if(current->RightNeuron!=NULL){
+	tmp = HeadNeuron;
+	current=tmp;
+	int i=0;
+	while(tmp!=NULL){
+		while(current!=NULL){
+			int breakcon = rand()%10;
+			if(breakcon==0){
 				current->RightNeuron=NULL;
-				hit =1;
-				//size--;
 			}
-		}
-		if(hit == 1){
-			if(current->DownNeuron==NULL){
-			//	cout<<"continue"<<endl;
-				continue;
-			}
-			else
-				current = current->DownNeuron;
-		}
-		if(i==2)
-			current=HeadNeuron->DownNeuron;
-		else if(i==5)
-			current=HeadNeuron->DownNeuron->DownNeuron;
-		else
 			current=current->RightNeuron;
+		}
+		tmp=tmp->DownNeuron;
+		current=tmp;
 	}
 
-	current=HeadNeuron;
-
-	for(int i=0; i<9; i++){
-		int hit = 0;
-		int breakcon = rand()%10;
-		//cout<<"break : "<<breakcon<<endl;
-		if(breakcon == 0){
-			if(current->RightNeuron!=NULL){
+	tmp = HeadNeuron;
+	current=tmp;
+	i=0;
+	while(tmp!=NULL){
+		while(current!=NULL){
+			int breakcon = rand()%10;
+			if(breakcon==0){
 				current->RightNeuron=NULL;
-				hit =1;
 			}
-		}
-		if(hit == 1){
-			if(current->DownNeuron==NULL){
-			//	cout<<"continue"<<endl;
-				continue;
-			}
-			else
-				current = current->DownNeuron;
-		}
-		if(i==2)
-			current=HeadNeuron->DownNeuron;
-		else if(i==5)
-			current=HeadNeuron->DownNeuron->DownNeuron;
-		else
 			current=current->RightNeuron;
+		}
+		tmp=tmp->DownNeuron;
+		current=tmp;
 	}
 
+	tmp = HeadNeuron;
+	current=tmp;
+	i=0;
+	while(tmp!=NULL){
+		while(current!=NULL){
+			int breakcon = rand()%10;
+			if(breakcon==0){
+				current->RightNeuron=NULL;
+			}
+			current=current->RightNeuron;
+		}
+		tmp=tmp->DownNeuron;
+		current=tmp;
+	}
 }
 
 int NeList::oper(int v1, int v2, string op){
@@ -207,9 +196,10 @@ string NeList::sym(string op){
 
 void NeList::Cal(){
 	Neuron *current = HeadNeuron;
-	int result;
 	Neuron *second = HeadNeuron->DownNeuron;
 	Neuron *third = HeadNeuron->DownNeuron->DownNeuron;
+	int result;
+
 	cout<<current->value;
 	while(1){
 		if(current->RightNeuron!=NULL){

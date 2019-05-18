@@ -16,8 +16,5 @@ int main(){
 	}
 	
 	list.Conbreak();
-
-	//list.Print();
 	list.Cal();
-
 }
