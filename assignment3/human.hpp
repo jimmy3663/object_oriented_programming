@@ -71,13 +71,11 @@ void Human::action(Monster *m){
 		if(m->GetRow() == Row){
 			//cout<<"in Row "<<endl;
 			if(m->GetColoumn() == Coloumn +1){
-				cout<<Index<<" Hit "<<m->GetIndex()<<endl;
 				m->SetHealth(m->GetHealth()-Power);
 				hit=1;
 				break;
 			}
 			else if(m->GetColoumn() == Coloumn-1){
-				cout<<Index<<" Hit "<<m->GetIndex()<<endl;
 				m->SetHealth(m->GetHealth()-Power);
 				hit=1;
 				break;
@@ -86,13 +84,11 @@ void Human::action(Monster *m){
 		else if((m->GetColoumn() == Coloumn )){
 			//cout<<"in coloumn"<<endl;
 			if(m->GetRow() == Row+1){
-				cout<<Index<<" Hit "<<m->GetIndex()<<endl;
 				m->SetHealth(m->GetHealth()-Power);
 				hit=1;
 				break;
 			}
 			else if(m->GetRow() == Row-1){
-				cout<<Index<<" Hit "<<m->GetIndex()<<endl;
 				m->SetHealth(m->GetHealth()-Power);
 				hit=1;
 				break;
@@ -107,11 +103,9 @@ void Human::action(Monster *m){
 		while(m!=NULL){
 			if(m->GetRow() == Row){
 				if(m->GetColoumn() > Coloumn){
-					cout<<Index<<" move "<<endl;
 					Coloumn++;
 				}
 				else if(m->GetColoumn() < Coloumn){
-					cout<<Index<<" move "<<endl;
 					Coloumn--;
 				}
 
@@ -193,23 +187,19 @@ void Human::action(Monster *m){
 			while(m!=NULL){
 				if(m->GetIndex() == target){
 					if(m->GetColoumn() > Coloumn){
-						cout<<"Human move coloumn++"<<endl;
 						Coloumn++;
 						break;
 					}
 					else if(m->GetColoumn() < Coloumn){
-						cout<<"HUman move coloumn --"<<endl;
 						Coloumn--;
 						break;
 					}
 					else{
 						if(m->GetRow() > Row){
-							cout<<"Human move Row ++"<<endl;
 							Row++;
 							break;
 						}
 						else if(m->GetRow() < Row){
-							cout<<"Humna move Row --"<<endl;
 							Row --;
 							break;
 						}
@@ -250,7 +240,6 @@ void Archer::action(Monster *m){
 	Monster *tmp = m;
 	while(m!=NULL){
 		if(m->GetRow() == GetRow() && m->GetColoumn() <= GetColoumn() +2 && m->GetColoumn() >= GetColoumn()-2){
-			cout<<"Archer Hit "<<m->GetIndex()<<endl;
 			m->SetHealth(m->GetHealth()-GetPower());
 			hit=1;
 			break;
@@ -261,31 +250,26 @@ void Archer::action(Monster *m){
 	if(hit==0){
 		while(m!=NULL){
 			if((m->GetRow() <= (GetRow() + 1) )&& (m->GetRow() >= (GetRow() -1) )&& (m->GetColoumn() <= (GetColoumn()+1) )&& (m->GetColoumn() >= GetColoumn()-1)){
-				cout<<"Archer Hit!!"<<m->GetIndex()<<endl;
 				m->SetHealth(m->GetHealth()-GetPower());
 				hit =1;
 				break;
 			}
 			else if( (m->GetColoumn()== GetColoumn()) && (m->GetRow()==GetRow()+2)){
-				cout<<"Archer Hit!!"<<m->GetIndex()<<endl;
 				m->SetHealth(m->GetHealth()-GetPower());
 				hit =1;
 				break;
 			}
 			else if((m->GetColoumn() == GetColoumn() )&& (m->GetRow() == GetRow()-2)){
-				cout<<"Archer Hit!!"<<m->GetIndex()<<endl;
 				m->SetHealth(m->GetHealth()-GetPower());
 				hit =1;
 				break;
 			}
 			else if( (m->GetRow() == GetRow() )&& ( m->GetColoumn() == GetColoumn()+2 )){
-				cout<<"Archer Hit!!"<<m->GetIndex()<<endl;
 				m->SetHealth(m->GetHealth()-GetPower());
 				hit=1;
 				break;
 			}
 			else if( (m->GetRow() == GetRow()) && (m->GetColoumn() == GetColoumn()-2)){
-				cout<<"Archer Hit!!"<<m->GetIndex()<<endl;
 				m->SetHealth(m->GetHealth()-GetPower());
 				hit=1;
 				break;
@@ -300,11 +284,9 @@ void Archer::action(Monster *m){
 		while(m!=NULL){
 			if(m->GetRow() == GetRow()){
 				if(m->GetColoumn() > GetColoumn()){
-					cout<<"Human hit 0 coloumn++"<<endl;
 					SetColoumn(GetColoumn()+1);
 				}
 				else if(m->GetColoumn() < GetColoumn()){
-					cout<<"Human hit 0 coloumn--"<<endl;
 					SetColoumn(GetColoumn()-1);
 				}
 
@@ -386,23 +368,19 @@ void Archer::action(Monster *m){
 			while(m!=NULL){
 				if(m->GetIndex() == target){
 					if(m->GetColoumn() > GetColoumn()){
-						cout<<"Human move coloumn++"<<endl;
 						SetColoumn(GetColoumn()+1);
 						break;
 					}
 					else if(m->GetColoumn() < GetColoumn()){
-						cout<<"HUman move coloumn --"<<endl;
 						SetColoumn(GetColoumn()-1);
 						break;
 					}
 					else{
 						if(m->GetRow() > GetRow()){
-							cout<<"Human move Row ++"<<endl;
 							SetRow(GetRow()+1);
 							break;
 						}
 						else if(m->GetRow() < GetRow()){
-							cout<<"Human move Row --"<<endl;
 							SetRow(GetRow()-1);
 							break;
 						}
@@ -418,15 +396,148 @@ void Archer::action(Monster *m){
 }
 
 class Warlock:public Human{
-	private: int mana;
+	private: bool mana;
 public:
-	Warlock(int h, int p, int r, int c, int in, Human* pr, Human *n, int m):Human(h, p, r, c, in, pr, n){mana = m;}
+	Warlock(int h, int p, int r, int c, int in, Human* pr, Human *n, bool m):Human(h, p, r, c, in, pr, n){mana = m;}
 	void action(Monster *m);
 };
 
 void Warlock::action(Monster *m){
-	cout<<GetIndex()<<" move"<<endl;
-	SetColoumn(GetColoumn()+1);
+	int hit=0;
+	Monster *tmp = m;
+	while(m!=NULL){
+		if(m->GetRow() == GetRow() && m->GetColoumn() <= GetColoumn() +1 && m->GetColoumn() >= GetColoumn()-1){
+			m->SetHealth(m->GetHealth()-GetPower());
+			hit=1;
+			mana = false;
+			break;
+		}
+		if(m->GetColoumn() == GetColoumn() && m->GetRow() <= GetRow() +1 && m->GetRow() >= GetRow()-1){
+			m->SetHealth(m->GetHealth()-GetPower());
+			hit=1;
+			mana = false;
+			break;
+		}
+		m=m->Getnext();
+	}
+	m = tmp;
+
+	m=tmp;
+	int move = 0;
+	if(hit==0){
+		mana = true;
+		while(m!=NULL){
+			if(m->GetRow() == GetRow()){
+				if(m->GetColoumn() > GetColoumn()){
+					SetColoumn(GetColoumn()+1);
+				}
+				else if(m->GetColoumn() < GetColoumn()){
+					SetColoumn(GetColoumn()-1);
+				}
+
+				move = 1;
+				break;
+			}
+			else 
+				m = m->Getnext();
+		}
+
+		m=tmp;
+
+		pair <string, int> p;
+		vector <pair <string, int> > v;
+		if(move == 0){
+			int r=0, c=0;
+
+			while(m!=NULL){
+				if(m->GetRow() > GetRow())
+					r = m->GetRow() - GetRow();
+				else 
+					r = GetRow() - m->GetRow();
+				if(m->GetColoumn() > GetColoumn())
+					c = m->GetColoumn() - GetColoumn();
+				else 
+					c = GetColoumn() - m->GetColoumn();
+
+				p=make_pair(m->GetIndex() , r+c);
+				v.push_back(p);
+				m= m->Getnext();
+			}
+
+			int small = v[0].second;
+			vector <string> name; 
+			int cnt=0;
+			for(int i=1; i<v.size(); i++){
+				if(small > v[i].second){
+					small = v[i].second;
+					name.push_back(v[i].first);
+					cnt++;
+				}
+			}
+			if(cnt==0)
+				name.push_back(v[0].first);
+
+			m = tmp;
+			pair <string, int> p2;
+			vector < pair<string, int> > v2;
+			for(int i=0; i< name.size() ; i++){
+				while(m!=NULL){
+					if(m->GetIndex() == name[i]){
+						if(m->GetRow() > GetRow())
+							r = m->GetRow() - GetRow();
+						else 
+							r = GetRow() - m->GetRow();
+						
+						p2 = make_pair(m->GetIndex(), r);
+						v2.push_back(p2);
+					}
+					m=m->Getnext();
+				}
+				m=tmp;
+			}
+
+			small = v2[0].second;
+			string target;
+			cnt=0;
+			for(int i=1; i<v2.size() ; i++){
+				if(small > v2[i].second){
+					target = v2[i].first;
+					cnt++;
+				}
+			}
+
+			if(cnt==0){
+				target = v2[0].first;
+			}
+			m=tmp;
+			while(m!=NULL){
+				if(m->GetIndex() == target){
+					if(m->GetColoumn() > GetColoumn()){
+						SetColoumn(GetColoumn()+1);
+						break;
+					}
+					else if(m->GetColoumn() < GetColoumn()){
+						SetColoumn(GetColoumn()-1);
+						break;
+					}
+					else{
+						if(m->GetRow() > GetRow()){
+							SetRow(GetRow()+1);
+							break;
+						}
+						else if(m->GetRow() < GetRow()){
+							SetRow(GetRow()-1);
+							break;
+						}
+					}
+				}
+				m=m->Getnext();
+			}
+
+
+		}
+
+	}
 }
 
 class HumanList{
@@ -443,6 +554,7 @@ public:
 	int GetSize(){return size;}
 	Human *GetHead(){return HeadNode;}
 	Human *GetTail(){return TailNode;}
+	vector <int> CheckDied(Human *h);
 };
 
 HumanList::HumanList(){
@@ -450,6 +562,19 @@ HumanList::HumanList(){
 	size=0;
 }
 HumanList::~HumanList(){}
+
+vector <int> HumanList::CheckDied(Human *h){
+	Human *current = HeadNode;
+	vector <int> v;
+
+	while(current!=NULL){
+		if(current->Health<=0)
+			v.push_back(current->Index);
+		current=current->next;
+	}
+
+	return v;
+}
 
 void HumanList::pushback(int index){
 	Human *newNode =NULL;
@@ -460,7 +585,7 @@ void HumanList::pushback(int index){
 	else if(index == 3)
 		newNode = new Archer(7, 10, index, 0, index+1, NULL, NULL);
 	else if(index == 4)
-		newNode = new Warlock(3, 10, index, 0, index+1, NULL, NULL, 1);
+		newNode = new Warlock(3, 10, index, 0, index+1, NULL, NULL, true);
 	
 
 	Human *current=NULL;
@@ -489,7 +614,7 @@ void HumanList::Print(){
 	Human *current = HeadNode;
 
 	while(current!=NULL){
-		cout<<current->Index<<" HP: "<<current->Health<<" Row : "<<current->Row<<" Coloumn : "<<current->Coloumn<<endl;
+		cout<<current->Index<<endl;
 		current=current->next;
 	}
 }
@@ -499,12 +624,12 @@ void HumanList::DeleteList(Human *hu){
 	Human *h = HeadNode;
 	if(size == 1){
 		HeadNode = NULL;
+		size--;
 		delete h;
 	}
 	else{
 		while(h!=NULL){
 			if(h->Health<=0){
-				cout<<h->Index<<" died"<<endl;
 				if(h == HeadNode){
 					h->next->prev = NULL;
 					HeadNode = h->next;
@@ -542,7 +667,6 @@ void Monster::action(Human *h){
 	while(h!=NULL){
 		if(h->GetRow() == Row){
 			if(h->GetColoumn() <= Coloumn +1 && h->GetColoumn() >= Coloumn-1){// && h->GetRow() <= Row+1 && h->GetRow() >= Row-1){
-				cout<<Index<<" Hit "<<h->GetIndex()<<endl;
 				h->SetHealth(h->GetHealth()-Power);
 				hit=1;
 				break;
@@ -550,12 +674,11 @@ void Monster::action(Human *h){
 		}
 		h = h->Getnext();
 	}
-	cout<<"1"<<endl;
+
 	h = tmp;
 	if(hit==0){
 		while(h!=NULL){
 			if(h->GetRow() <= Row+1 && h->GetRow() >= Row-1 && h->GetColoumn() <= Coloumn +1 && h->GetColoumn() >= Coloumn-1){
-				cout<<Index<<" Hit "<<h->GetIndex()<<endl;
 				h->SetHealth(h->GetHealth()-Power);
 				hit=1;
 				break;
@@ -572,11 +695,9 @@ void Monster::action(Human *h){
 		while(h!=NULL){
 			if(h->GetRow() == Row){
 				if(h->GetColoumn() > Coloumn){
-					cout<<Index<<" move"<<endl;
 					Coloumn++;
 				}
 				else if(h->GetColoumn() < Coloumn){
-					cout<<Index<<" move"<<endl;
 					Coloumn--;
 				}
 
@@ -587,7 +708,6 @@ void Monster::action(Human *h){
 				h = h->Getnext();
 		}
 
-		cout<<"3"<<endl;
 		h=tmp;
 
 		pair <int, int> p;
@@ -598,7 +718,6 @@ void Monster::action(Human *h){
 			int r=0, c=0;
 			
 			while(h!=NULL){
-				cout<<"4"<<endl;
 				if(h->GetRow() > Row)
 					r = h->GetRow() - Row;
 				else 
@@ -613,7 +732,6 @@ void Monster::action(Human *h){
 				h= h->Getnext();
 			}
 
-			cout<<"5"<<endl;
 			int small = v[0].second;
 			vector <int> name; 
 			int cnt=0;
@@ -664,23 +782,19 @@ void Monster::action(Human *h){
 			while(h!=NULL){
 				if(h->GetIndex() == target){
 					if(h->GetColoumn() > Coloumn){
-						cout<<Index<<" move"<<endl;
 						Coloumn++;
 						break;
 					}
 					else if(h->GetColoumn() < Coloumn){
-						cout<<Index<<" move"<<endl;
 						Coloumn--;
 						break;
 					}
 					else{
 						if(h->GetRow() > Row){
-							cout<<Index<<" move"<<endl;
 							Row++;
 							break;
 						}
 						else if(h->GetRow() < Row){
-							cout<<Index<<" move"<<endl;
 							Row --;
 							break;
 						}
@@ -709,6 +823,7 @@ public:
 	Monster *GetHead(){return HeadNode;}
 	Monster *GetTail(){return TailNode;}
 	void DeleteList(Monster *m);
+	vector <string> CheckDied(Monster *m);
 
 };
 
@@ -717,6 +832,20 @@ MonsterList::MonsterList(){
 	size=0;
 }
 MonsterList::~MonsterList(){}
+
+vector <string> MonsterList::CheckDied(Monster *m){
+	Monster *current = HeadNode;
+	vector <string> v;
+	
+	while(current!=NULL){
+		if(current->Health<=0)
+			v.push_back(current->Index);
+		current=current->next;
+	}
+
+	return v;
+}
+
 void MonsterList::pushback(string a, int in){
 	Monster *newNode = new Monster(20, 7, in, 4, a, NULL, NULL);
 	Monster *current = NULL;
@@ -745,7 +874,7 @@ void MonsterList::Print(){
 	Monster *current = HeadNode;
 
 	while(current!=NULL){
-		cout<<current->Index<<" HP: "<<current->Health<<" Row: "<<current->Row<<" Coloumn : "<<current->Coloumn<< endl;
+		cout<<current->Index<< endl;
 		current=current->next;
 	}
 }
@@ -755,12 +884,12 @@ void MonsterList::DeleteList(Monster *mo){
 
 	if(size == 1){
 		HeadNode =NULL;
+		size--;
 		delete m;
 	}
 	else{
 		while(m!=NULL){
 			if(m->Health <=0){
-				cout<<m->Index<<" died"<<endl;
 				if(m == HeadNode){
 					m->next->prev = NULL;
 					HeadNode = m -> next;

@@ -29,71 +29,68 @@ int main(){
 	int i=1;
 	while(1){
 		//cout<<"i: "<<i<<endl;
-		cout<<"============= Round "<<i<<" ============="<<endl;
-		i++;
+		vector<int> hd;
+		vector<string> md;
 		Human *h = hl.GetHead();
 		Monster *m = ml.GetHead();
+
+
+		cout<<"######## Results of Round "<<i<<" ########"<<endl;
+		i++;
 		int hcnt=0;
 		int mcnt=0;
 		int hsize=hl.GetSize();
 		int msize=ml.GetSize();
-		cout<<"hsize: "<<hsize<<endl;
-		cout<<"msize: "<<msize<<endl;
-		while(1){
-			if(hcnt == hsize && mcnt == msize)
-				break;
-			cout<<"monster Index: "<<m->GetIndex()<<endl;
-			if(hcnt < hsize){
-				cout<<"why?"<<endl;
+		int i=0;
+
+		if(hl.GetHead()!=NULL){
+			while(1){
+				if(i == hsize)
+					break;
 				h->action(ml.GetHead());
+				h = h ->Getnext();
+				i++;
 			}
-
-			if(mcnt < msize){
-				cout<<"Here"<<endl;
-				m->action(hl.GetHead());
-
-			}
-
-
-			hl.DeleteList(h);
-			ml.DeleteList(m);
-
-			
-			//else if(m->Getprev()->Getnext() ==NULL)
-			//	break;
-
-			/*if(h->Getnext() == NULL && m->Getnext() == NULL){
-				cout<<i<<" round done"<<endl;
-				break;
-			}
-			else{
-				if(h->Getnext() == NULL && m->Getnext() !=NULL){
-					m = m->Getnext();
-				}
-				else if(h->Getnext() != NULL && m->Getnext() == NULL){
-					h = h->Getnext();
-				}
-				else {
-					m = m->Getnext();
-					h = h->Getnext();
-				}
-			}*/
-			if(hcnt < hsize){
-				h= h->Getnext();
-				hcnt++;
-			}
-			if(mcnt<msize){
-				m = m->Getnext();
-				mcnt++;
-			}
-			cout<<"hcnt: "<<hcnt<<endl;
-			cout<<"mcnt: "<<mcnt<<endl;
-
 		}
+
+		i=0;
+		if(ml.GetHead()!=NULL){
+			while(1){
+				if(i == msize)
+					break;
+
+				m->action(hl.GetHead());
+				m = m->Getnext();
+				i++;
+			}
+		}
+
+		for(int j=0; j<hl.CheckDied(hl.GetHead()).size();j++){
+			hd.push_back(hl.CheckDied(hl.GetHead())[j]);
+		}
+
+		for(int j=0; j<ml.CheckDied(ml.GetHead()).size();j++){
+			md.push_back(ml.CheckDied(ml.GetHead())[j]);
+		}		
+
+		hl.DeleteList(h);
+		ml.DeleteList(m);
+		
+			
 		if(hl.GetHead()==NULL && ml.GetHead() != NULL){
+			
 			cout<<"<Human>"<<endl;
 			cout<<"<Monster>"<<endl;
 			ml.Print();
+
+			for(int j=0; j<hd.size() ;j++){
+				cout<<"Human "<<hd[j]<<" has died"<<endl;
+			}
+			for(int j=0; j<md.size() ;j++){
+				cout<<"Monster "<<md[j]<<" has died"<<endl;
+			}
+
+			cout<<endl<<"######## Final result of battle #######"<<endl;
 			cout<<"Human has been defeated"<<endl;
 			break;
 		}
@@ -101,6 +98,15 @@ int main(){
 			cout<<"<Human>"<<endl;
 			hl.Print();
 			cout<<"<Monster>"<<endl;
+
+			for(int j=0; j<hd.size() ;j++){
+				cout<<"Human "<<hd[j]<<" has died"<<endl;
+			}
+			for(int j=0; j<md.size() ;j++){
+				cout<<"Monster "<<md[j]<<" has died"<<endl;
+			}
+
+			cout<<endl<<"######## Final result of battle #######"<<endl;
 			cout<<"Monster has been defeated"<<endl;
 			break;
 		}
@@ -113,7 +119,16 @@ int main(){
 			hl.Print();
 			cout<<"<Monster>"<<endl;
 			ml.Print();
+
+			for(int j=0; j<hd.size() ;j++){
+				cout<<"Human "<<hd[j]<<" has died"<<endl;
+			}
+			for(int j=0; j<md.size() ;j++){
+				cout<<"Monster "<<md[j]<<" has died"<<endl;
+			}
+			cout<<endl;
 		}
+
 
 	}
 	
