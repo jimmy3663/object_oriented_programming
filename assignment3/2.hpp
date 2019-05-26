@@ -19,7 +19,6 @@ private:
 class CacheManager{
 private:
 	CacheNode *HeadNode;
-	//CacheNode *TailNode;
 	int cnt; 
 	int time;
 
@@ -27,7 +26,6 @@ public:
 	CacheManager();
 	void Push(string, int);
 	void Insert(string, int, int);
-	void Del();
 	void Print(string, int);
 	int GetTS();
 	int GetCNT();

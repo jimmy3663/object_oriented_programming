@@ -1,7 +1,5 @@
 #ifndef HUMAN_HPP
 #define HUMAN_HPP
-//#include "monster.hpp"
-//#include "job.hpp"
 
 #include <iostream>
 #include <string>
@@ -10,44 +8,44 @@
 
 using namespace std;
 
-class Monster;
+class Monster; // pre declaration for Human class member fucntion 
 
-class Human{
+class Human{ // Human class 
 friend class HumanList;
 private: 
-	int Health;
-	int Power; 
-	int Row, Coloumn;
-	int Index;
-	Human *prev, *next;
+	int Health; // human health 
+	int Power;  // human power 
+	int Row, Coloumn; // human row and coloumn 
+	int Index; // human index 
+	Human *prev, *next; // next node , previous node 
 public:
-	Human(int h, int p, int row, int col, int in, Human *pr, Human *n): Health(h), Power(p), Row(row), Coloumn(col), Index(in), prev(pr), next(n){}
-	~Human();
-	virtual void action(Monster *m);
-	void SetHealth(int h){Health=h;}
-	int GetHealth(){return Health;}
-	int GetPower(){return Power;}
-	int GetRow(){return Row;}
-	int GetColoumn(){return Coloumn;}
-	int GetIndex(){return Index;}
-	Human *Getnext(){return next;}
-	void SetRow(int r){Row =r;}
-	void SetColoumn(int c){Coloumn=c;}
+	Human(int h, int p, int row, int col, int in, Human *pr, Human *n): Health(h), Power(p), Row(row), Coloumn(col), Index(in), prev(pr), next(n){} // constructor 
+	~Human(); // destructor 
+	virtual void action(Monster *m); // action function for moving and attacking 
+	void SetHealth(int h){Health=h;} // access private variable and modify human health 
+	int GetHealth(){return Health;} // access private variable and return health 
+	int GetPower(){return Power;} // get return power 
+	int GetRow(){return Row;} // get return row 
+	int GetColoumn(){return Coloumn;} // get return coloumn 
+	int GetIndex(){return Index;} // get return index 
+	Human *Getnext(){return next;} // get return next 
+	void SetRow(int r){Row =r;} // modify row 
+	void SetColoumn(int c){Coloumn=c;} // modify coloumn 
 
 
 };
 
-class Monster{
+class Monster{ 
 friend class MonsterList;
 private:
-	int Health;
-	int Power;
-	int Row, Coloumn;
-	string Index;
-	Monster *prev, *next;
+	int Health; // monster health 
+	int Power; // monster power 
+	int Row, Coloumn; // monster row and coloumn 
+	string Index; // monster index 
+	Monster *prev, *next; // next node and previous node 
 public:
-	Monster(int h, int p, int row, int col, string in, Monster *pr, Monster *n): Health(h), Power(p), Row(row), Coloumn(col), Index(in), prev(pr), next(n){}
-	void action(Human *h);
+	Monster(int h, int p, int row, int col, string in, Monster *pr, Monster *n): Health(h), Power(p), Row(row), Coloumn(col), Index(in), prev(pr), next(n){} // constructor 
+	void action(Human *h); 
 	int GetHealth(){return Health;}
 	int GetPower(){return Power;}
 	int GetRow(){return Row;}
@@ -58,19 +56,21 @@ public:
 	void SetColoumn(int c){Coloumn=c;}
 	Monster *Getnext(){return next;}
 	Monster *Getprev(){return prev;}
-	~Monster();
+	~Monster(); // destrcutor 
 };
 
-Human::~Human(){}
+Human::~Human(){} // human destructor 
 
-void Human::action(Monster *m){
-	int hit=0;
-	Monster *tmp = m;
+void Human::action(Monster *m){ // human action function 
+	int hit=0; // if human hit then 1 if not 0 
+	Monster *tmp = m; // tmp for monster's head node 
 	//cout<<m->GetIndex()<<endl;
-	while(m!=NULL){
-		if(m->GetRow() == Row){
-			//cout<<"in Row "<<endl;
-			if(m->GetColoumn() == Coloumn +1){
+	while(m!=NULL){ // if monster node is not null 
+
+/////////////// Human's attack range ///////////////////
+
+		if(m->GetRow() == Row){ //  hit monster first which is on the same row 
+			if(m->GetColoumn() == Coloumn +1){ 
 				m->SetHealth(m->GetHealth()-Power);
 				hit=1;
 				break;
@@ -97,11 +97,16 @@ void Human::action(Monster *m){
 		m = m->Getnext();
 	}
 
+//////////////////////////////////////////////////////
+
 	m=tmp;
 	int move = 0;
-	if(hit==0){
+	if(hit==0){ // if human didn't hit 
+
+///////////////////// verify which monster is the cloest ////////////////////
+
 		while(m!=NULL){
-			if(m->GetRow() == Row){
+			if(m->GetRow() == Row){ // move first to monster which is on the same row 
 				if(m->GetColoumn() > Coloumn){
 					Coloumn++;
 				}
@@ -116,11 +121,11 @@ void Human::action(Monster *m){
 				m = m->Getnext();
 		}
 
-		m=tmp;
+		m=tmp; // monster's head node 
 
-		pair <string, int> p;
+		pair <string, int> p; // pair for monster's index and distance between human and monster 
 		vector <pair <string, int> > v;
-		if(move == 0){
+		if(move == 0){ // if there is no monster on the same row 
 			int r=0, c=0;
 
 			while(m!=NULL){
@@ -133,14 +138,17 @@ void Human::action(Monster *m){
 				else 
 					c = Coloumn - m->GetColoumn();
 
-				p=make_pair(m->GetIndex() , r+c);
-				v.push_back(p);
-				m= m->Getnext();
+				p=make_pair(m->GetIndex() , r+c); // make pair with monster's index and distance between human and monster 
+				v.push_back(p); // store in vector 
+				m= m->Getnext(); 
 			}
 
-			int small = v[0].second;
-			vector <string> name; 
+			int small = v[0].second; // variable for smallest distance fram first vector 
+			vector <string> name;  // get monster's index 
 			int cnt=0;
+
+///////////// identify which monster has closet distance ///////////////
+
 			for(int i=1; i<v.size(); i++){
 				if(small > v[i].second){
 					small = v[i].second;
@@ -148,11 +156,11 @@ void Human::action(Monster *m){
 					cnt++;
 				}
 			}
-			if(cnt==0)
-				name.push_back(v[0].first);
+			if(cnt==0)// if there are no monsters which has same smallest distance 
+				name.push_back(v[0].first); 
 
-			m = tmp;
-			pair <string, int> p2;
+			m = tmp; // monster's head node 
+			pair <string, int> p2; // make pair with monster's index and distance between human's row and monster's row 
 			vector < pair<string, int> > v2;
 			for(int i=0; i< name.size() ; i++){
 				while(m!=NULL){
@@ -171,7 +179,7 @@ void Human::action(Monster *m){
 			}
 
 			small = v2[0].second;
-			string target;
+			string target; // get monster which has closest distance between humans's row and monster's row 
 			cnt=0;
 			for(int i=1; i<v2.size() ; i++){
 				if(small > v2[i].second){
@@ -180,11 +188,16 @@ void Human::action(Monster *m){
 				}
 			}
 
-			if(cnt==0){
+			if(cnt==0){ // if only one monster 
 				target = v2[0].first;
 			}
-			m=tmp;
+
+//////////////////////////////////////////////////////////////////////////////
+
+			m=tmp; // monster's head node 
 			while(m!=NULL){
+
+///////////////// Human moving depend on monster's location ///////////
 				if(m->GetIndex() == target){
 					if(m->GetColoumn() > Coloumn){
 						Coloumn++;
@@ -205,6 +218,7 @@ void Human::action(Monster *m){
 						}
 					}
 				}
+/////////////////////////////////////////////////////////////////////////
 				m=m->Getnext();
 			}
 
@@ -214,30 +228,31 @@ void Human::action(Monster *m){
 	}
 }
 
-class Peasant:public Human{
+class Peasant:public Human{ // child class Peasant 
 public:
 	Peasant(int h, int p, int r, int c, int in, Human *pr, Human *n):Human(h, p, r, c, in, pr, n){}
-	//void action(Monster *m);
+
 };
 
 
-class Sword:public Human{
+class Sword:public Human{ // child class Sword 
 public:
 	Sword(int h, int p, int r, int c, int in, Human* pr, Human *n):Human(h, p, r, c, in, pr, n){}
-	//void action(Monster *m);
+
 };
 
 
-class Archer:public Human{
+class Archer:public Human{ // child class archer 
 public:
 	Archer(int h, int p, int r, int c, int in, Human* pr, Human *n):Human(h, p, r, c, in, pr, n){}
-	void action(Monster *m);
+	void action(Monster *m); //Human action member fucntion overloading 
 };
 
-void Archer::action(Monster *m){
-	//cout<<GetRow()<<endl;
+void Archer::action(Monster *m){// overloading fucntion 
 	int hit=0;
 	Monster *tmp = m;
+
+///////////////////////////// Archer's hit range //////////////////////////////
 	while(m!=NULL){
 		if(m->GetRow() == GetRow() && m->GetColoumn() <= GetColoumn() +2 && m->GetColoumn() >= GetColoumn()-2){
 			m->SetHealth(m->GetHealth()-GetPower());
@@ -246,6 +261,7 @@ void Archer::action(Monster *m){
 		}
 		m=m->Getnext();
 	}
+
 	m = tmp;
 	if(hit==0){
 		while(m!=NULL){
@@ -277,7 +293,7 @@ void Archer::action(Monster *m){
 			m= m->Getnext();
 		}
 	}
-
+///////////////////////////////////////////////////////////////////////////////
 	m=tmp;
 	int move = 0;
 	if(hit==0){
